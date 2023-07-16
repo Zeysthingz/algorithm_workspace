@@ -1,30 +1,25 @@
-# Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-#
-# An input string is valid if:
-#
-# Open brackets must be closed by the same type of brackets.
-# Open brackets must be closed in the correct order.
-# Every close bracket has a corresponding open bracket of the same type.
 
+# Binary search function
+def binary_search(arr,target):
+    left_bound = 0
+    right_bound = len(arr)
+    while left_bound <= right_bound:
+        mid= (left_bound + right_bound)//2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left_bound = mid + 1
+        else:
+            right_bound = mid - 1
+    # if target not in arr:
+    return -1
 
-# ([]){}() is valid
-# ([)] is not valid
-# Last in first out
+# Example usage:
+my_list = [1, 3, 5, 0,7, 9, 11, 13, 15, 17,0,56]
+target_element = 7
+result=binary_search(my_list,target_element)
 
-def isValid(string):
-    bracket_list = []
-    brackets = {
-        '(': ')',
-        '{': '}',
-        '[': ']'
-    }
-    for bracket in string:
-        # iterates oevr key of dictionary
-        if bracket in brackets:
-            bracket_list.append(bracket)
-        elif len(bracket_list)==0 or bracket!=brackets[bracket_list.pop()]:
-            return False
-
-    return len(bracket_list)==0
-
-print(isValid('(([]){}()'))
+if result != -1:
+    print("Element is present at index", str(result))
+else:
+    print("Element is not present in array")
